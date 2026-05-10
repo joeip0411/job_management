@@ -1,0 +1,5 @@
+.env
+.venv/
+debug_jd_*.html
+__pycache__/
+*.pyc

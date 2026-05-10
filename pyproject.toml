@@ -1,0 +1,11 @@
+[project]
+name = "linkedin-notion-pipeline"
+version = "0.1.0"
+description = "Scrape LinkedIn job postings and insert into a Notion database"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31",
+]
+
+[dependency-groups]
+dev = []
