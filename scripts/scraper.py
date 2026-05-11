@@ -8,29 +8,11 @@ from pathlib import Path
 from urllib.parse import quote
 
 import requests
+from util import ROOT, load_config, load_env, notion_headers
 
-ROLE_QUERIES = [
-    "senior analytics engineer", "senior data engineer"
-]
+ROLE_QUERIES = load_config()["linkedin"]["role_queries"]
 
 PLACEHOLDER_TOKENS = {"company", "position", "company name", "role"}
-
-
-def load_env(env_path):
-    for line in Path(env_path).read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        os.environ[k] = v.strip().strip('"').strip("'")
-
-
-def notion_headers(token):
-    return {
-        "Authorization": f"Bearer {token}",
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json",
-    }
 
 
 def query_all_rows(db_id, h):
@@ -75,16 +57,6 @@ def existing_job_ids(db_id, h):
         if val:
             ids.add(val)
     return ids
-
-
-def is_placeholder(value):
-    v = (value or "").strip().lower()
-    return (not v) or any(tok == v or tok in v for tok in PLACEHOLDER_TOKENS)
-
-
-def sanitize_filename(name):
-    name = re.sub(r"[\\/:*?\"<>|]", "-", name)
-    return re.sub(r"\s+", " ", name).strip()[:180]
 
 
 def parse_job_cards(html):
@@ -179,6 +151,7 @@ def run(args):
         db_id = f"{db_id[:8]}-{db_id[8:12]}-{db_id[12:16]}-{db_id[16:20]}-{db_id[20:]}"
 
     h = notion_headers(token)
+    search_cfg = load_config()["linkedin"]["search"]
     ensure_column(db_id, "note", "rich_text", h)
     ensure_column(db_id, "job_id", "rich_text", h)
 
@@ -195,7 +168,7 @@ def run(args):
     for q in ROLE_QUERIES:
         start = 0
         while True:
-            url = f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={quote(q)}&location=Sydney&f_TPR=r604800&sortBy=DD&start={start}"
+            url = f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={quote(q)}&location={search_cfg['location']}&f_TPR={search_cfg['f_tpr']}&sortBy={search_cfg['sort_by']}&start={start}"
             html = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=25).text
             cards = parse_job_cards(html)
             if not cards:
@@ -258,6 +231,6 @@ def run(args):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--env", default=".env")
+    ap.add_argument("--env", default=str(ROOT / ".env"))
     ap.add_argument("--max-accept", type=int, default=12)
     run(ap.parse_args())

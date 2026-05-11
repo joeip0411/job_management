@@ -5,6 +5,7 @@ description = "Scrape LinkedIn job postings and insert into a Notion database"
 requires-python = ">=3.11"
 dependencies = [
     "requests>=2.31",
+    "pyyaml>=6.0",
 ]
 
 [dependency-groups]
