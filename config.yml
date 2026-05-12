@@ -1,11 +1,17 @@
 notion:
   master_resume_page_id: "35de711e6418802a8be1f78e6ca80fec"
+  resume_template_page_id: "35de711e6418800991aaf281162b76b3"
 
 linkedin:
-  role_queries:
-    - "senior analytics engineer"
-    - "senior data engineer"
   search:
     location: "Sydney"
-    f_tpr: "r604800"
+    f_tpr: "r86400"
     sort_by: "DD"
+  filters:
+    target_roles:
+      - "data engineer"
+      - "analytics engineer"
+    target_seniority:
+      - "senior"
+      - "lead"
+      - "principal"

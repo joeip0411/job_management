@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
-import argparse
 import json
 import os
 import re
 from html import unescape
-from pathlib import Path
 from urllib.parse import quote
 
 import requests
 from util import ROOT, load_config, load_env, notion_headers
 
-ROLE_QUERIES = load_config()["linkedin"]["role_queries"]
-
-PLACEHOLDER_TOKENS = {"company", "position", "company name", "role"}
+_cfg = load_config()
+SEARCH_CFG = _cfg["linkedin"]["search"]
+TARGET_ROLES = _cfg["linkedin"]["filters"]["target_roles"]
+TARGET_SENIORITY = _cfg["linkedin"]["filters"]["target_seniority"]
 
 
 def query_all_rows(db_id, h):
@@ -27,10 +26,6 @@ def query_all_rows(db_id, h):
             break
         cur = r.get("next_cursor")
     return out
-
-
-def title(prop):
-    return "".join(x.get("plain_text", "") for x in prop.get("title", [])).strip()
 
 
 def rich(prop):
@@ -117,7 +112,7 @@ def jd_to_children(jd_text):
     if not jd_text.strip():
         return []
     chunks = []
-    for para in [p.strip() for p in jd_text.split("\\n\\n") if p.strip()]:
+    for para in [p.strip() for p in jd_text.split("\n\n") if p.strip()]:
         while len(para) > 1800:
             chunks.append(para[:1800])
             para = para[1800:]
@@ -136,39 +131,41 @@ def reject_reason(jd, position):
     txt = (jd + "\n" + position).lower()
     if re.search(r"\b([8-9]|\d{2,})\+?\s*years?\b", txt):
         return "exp_8plus"
-    if not any(x in position.lower() for x in ["data engineer", "analytics engineer"]):
+    pos_lower = position.lower()
+    if not any(x in pos_lower for x in TARGET_ROLES):
         return "non_target_role"
-    if not any(x in position.lower() for x in ["senior", "lead", "principal"]):
+    if not any(x in pos_lower for x in TARGET_SENIORITY):
         return "non_target_seniority"
     return None
 
 
-def run(args):
-    load_env(args.env)
+def run(env_path=None):
+    if env_path is None:
+        env_path = str(ROOT / ".env")
+    load_env(env_path)
     token = os.environ["NOTION_TOKEN"]
     db_id = os.environ["DB_ID"]
     if "-" not in db_id and len(db_id) == 32:
         db_id = f"{db_id[:8]}-{db_id[8:12]}-{db_id[12:16]}-{db_id[16:20]}-{db_id[20:]}"
 
     h = notion_headers(token)
-    search_cfg = load_config()["linkedin"]["search"]
     ensure_column(db_id, "note", "rich_text", h)
     ensure_column(db_id, "job_id", "rich_text", h)
 
     summary = {
         "searched": 0, "accepted": 0, "rejected": 0,
         "rejected_by_reason": {"exp_8plus": 0, "non_target_role": 0, "non_target_seniority": 0},
-        "added": 0, "skipped": 0, "resumes_generated": 0, "status_updated": 0,
-        "failures": []
+        "added": 0, "skipped": 0,
     }
 
     # LinkedIn search + strict reject (deterministic)
     seen = set()
     accepted_jobs = []
-    for q in ROLE_QUERIES:
+    roles = [f"{s} {r}" for s in TARGET_SENIORITY for r in TARGET_ROLES]
+    for r in roles:
         start = 0
         while True:
-            url = f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={quote(q)}&location={search_cfg['location']}&f_TPR={search_cfg['f_tpr']}&sortBy={search_cfg['sort_by']}&start={start}"
+            url = f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={quote(r)}&location={SEARCH_CFG['location']}&f_TPR={SEARCH_CFG['f_tpr']}&sortBy={SEARCH_CFG['sort_by']}&start={start}"
             html = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=25).text
             cards = parse_job_cards(html)
             if not cards:
@@ -185,17 +182,8 @@ def run(args):
                     summary["rejected_by_reason"][reason] = summary["rejected_by_reason"].get(reason, 0) + 1
                     continue
                 j["jd_text"] = extract_jd_text(jd_html)
-                if not j["jd_text"]:
-                    print(f"[JD EXTRACT EMPTY] {j['company']} — {j['position']}", flush=True)
-                    sample_path = Path(f"debug_jd_{j['id']}.html")
-                    sample_path.write_text(jd_html, encoding="utf-8")
-                    print(f"  saved HTML to {sample_path}", flush=True)
                 accepted_jobs.append(j)
                 summary["accepted"] += 1
-                if len(accepted_jobs) >= args.max_accept:
-                    break
-            if len(accepted_jobs) >= args.max_accept:
-                break
             start += 25
 
     # skip jobs already in notion (idempotent via linkedin job id)
@@ -230,7 +218,4 @@ def run(args):
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--env", default=str(ROOT / ".env"))
-    ap.add_argument("--max-accept", type=int, default=12)
-    run(ap.parse_args())
+    run()
