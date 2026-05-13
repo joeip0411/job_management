@@ -3,3 +3,4 @@
 debug_jd_*.html
 __pycache__/
 *.pyc
+generated_resumes/
