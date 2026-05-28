@@ -1,0 +1,42 @@
+Position: Senior Data Engineer, Enterprise Data Platform
+Division: Group Data & Analytics
+Location: Sydney CBD (3 days on-site)
+Employment type: Permanent, full-time
+
+About Meridian Bank
+
+Meridian is one of Australia's tier-one financial institutions, serving over 8 million retail and business customers. Our Group Data & Analytics function is responsible for the secure, compliant, and reliable provision of data across the Bank, supporting regulatory reporting, risk management, customer analytics, and AI/ML use cases.
+
+Role purpose
+
+The Senior Data Engineer will be responsible for the design, development, and operation of enterprise-grade data pipelines on the Bank's strategic data platform (Snowflake on AWS, with dbt as the primary transformation framework). The successful candidate will work within a disciplined delivery framework, in close partnership with data stewards, data architects, security, and downstream consuming teams (risk, finance, marketing analytics).
+
+Key responsibilities
+
+- Design, develop, and maintain robust data ingestion and transformation pipelines feeding the Bank's certified data products
+- Ensure all data pipelines meet the Bank's data quality, observability, and lineage standards, including coverage by appropriate controls and reconciliation processes
+- Partner with Data Governance to ensure all data products comply with the Bank's Data Management Policy, including classification of sensitive customer data (PII) and adherence to data retention requirements
+- Contribute to platform-level capabilities including metadata management, data lineage, and CI/CD frameworks
+- Provide subject matter expertise to downstream teams during onboarding to the platform
+- Participate in change advisory board (CAB) processes and contribute to design review forums
+- Support incident management for production data pipelines, including root cause analysis and remediation
+- Mentor mid-level engineers and contribute to the team's engineering standards
+
+Essential criteria
+
+- 7+ years of experience in data engineering roles, with at least 3 years in a large enterprise environment (financial services preferred)
+- Demonstrated experience designing and operating production-grade pipelines on Snowflake and/or comparable cloud data warehouses
+- Strong dbt experience, including dbt project structure, testing, documentation, and CI/CD practices
+- Sound understanding of dimensional modeling and data warehousing principles (Kimball / Inmon)
+- Demonstrated experience implementing data quality frameworks and observability tooling
+- Familiarity with data governance principles, including data classification, lineage, and metadata management
+- Proven track record of partnering with non-technical stakeholders to translate business requirements into well-modeled data products
+- Excellent written and verbal communication skills, with the ability to produce design documentation suitable for architecture review
+
+Desirable
+
+- Experience with regulatory reporting workloads (APRA, AUSTRAC, BCBS239)
+- Exposure to data mesh and data product operating models
+- Experience with infrastructure-as-code (Terraform) in a regulated environment
+
+Australian Citizenship or Permanent Residency required. The successful candidate will be required to undergo a National Police Check and credit check prior to commencement.

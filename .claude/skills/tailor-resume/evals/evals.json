@@ -1,0 +1,35 @@
+{
+  "skill_name": "tailor-resume",
+  "evals": [
+    {
+      "id": 1,
+      "name": "senior-data-eng-startup",
+      "prompt": "Tailor my resume at .claude/skills/tailor-resume/evals/fixtures/master_resume.md to the job description at .claude/skills/tailor-resume/evals/fixtures/jd_senior_data_eng_startup.txt. Save the tailored version to ./generated_resumes/.",
+      "expected_output": "Markdown file in ./generated_resumes/ with scrappy, ownership-flavored voice. Should surface end-to-end pipeline ownership, shipping velocity, and stack-flexibility achievements. Should mirror startup JD vocabulary ('own', 'ship', 'wear many hats') where experience supports it. Should drop heavy enterprise-process bullets.",
+      "files": [
+        ".claude/skills/tailor-resume/evals/fixtures/master_resume.md",
+        ".claude/skills/tailor-resume/evals/fixtures/jd_senior_data_eng_startup.txt"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "senior-data-eng-enterprise",
+      "prompt": "Tailor my resume at .claude/skills/tailor-resume/evals/fixtures/master_resume.md to the job description at .claude/skills/tailor-resume/evals/fixtures/jd_senior_data_eng_bank.txt. Save the tailored version to ./generated_resumes/.",
+      "expected_output": "Markdown file with measured, methodology-forward tone. Should foreground governance, data-quality, SLA, and stakeholder-management achievements. Should mirror enterprise/regulated vocabulary (data lineage, governance, controls) only where the experience supports it. Should NOT fabricate finance-domain experience.",
+      "files": [
+        ".claude/skills/tailor-resume/evals/fixtures/master_resume.md",
+        ".claude/skills/tailor-resume/evals/fixtures/jd_senior_data_eng_bank.txt"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "senior-analytics-eng-saas",
+      "prompt": "Tailor my resume at .claude/skills/tailor-resume/evals/fixtures/master_resume.md to the job description at .claude/skills/tailor-resume/evals/fixtures/jd_senior_analytics_eng_saas.txt. Save the tailored version to ./generated_resumes/.",
+      "expected_output": "Markdown file with stakeholder-aware, modern-data-stack voice. Should foreground dbt/SQL modeling, semantic-layer/metric work, and partnership-with-business achievements. Should mirror modern data stack vocabulary (dbt, semantic layer, marts) where the experience supports it.",
+      "files": [
+        ".claude/skills/tailor-resume/evals/fixtures/master_resume.md",
+        ".claude/skills/tailor-resume/evals/fixtures/jd_senior_analytics_eng_saas.txt"
+      ]
+    }
+  ]
+}

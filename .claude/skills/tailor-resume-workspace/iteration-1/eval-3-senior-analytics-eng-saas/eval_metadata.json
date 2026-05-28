@@ -1,0 +1,6 @@
+{
+  "eval_id": 3,
+  "eval_name": "senior-analytics-eng-saas",
+  "prompt": "Tailor my resume at evals/fixtures/master_resume.md to the job description at evals/fixtures/jd_senior_analytics_eng_saas.txt (Cloudwave, B2B SaaS scaleup). Save the tailored version to ./generated_resumes/.",
+  "assertions": []
+}

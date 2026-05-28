@@ -1,0 +1,6 @@
+{
+  "eval_id": 2,
+  "eval_name": "senior-data-eng-enterprise",
+  "prompt": "Tailor my resume at evals/fixtures/master_resume.md to the job description at evals/fixtures/jd_senior_data_eng_bank.txt (Meridian Bank, regulated enterprise). Save the tailored version to ./generated_resumes/.",
+  "assertions": []
+}

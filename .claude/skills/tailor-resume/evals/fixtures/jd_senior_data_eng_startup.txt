@@ -1,0 +1,37 @@
+Company: Pixelmint
+Role: Senior Data Engineer
+Location: Sydney (hybrid, 2 days in-office)
+
+About us
+
+Pixelmint is a 35-person Series A startup building AI-native creative tools for marketing teams. We just closed our Series A six months ago and we're growing fast — we doubled headcount in the last year and we'll likely double again. We move quickly, we ship daily, and everyone here is comfortable wearing more than one hat.
+
+About the role
+
+We're hiring our second data engineer. You'll work directly with the founding engineer who's been holding the data platform together with duct tape and good intentions, and together you'll own everything from ingestion through to the dashboards the leadership team looks at every Monday morning. There is no "data team" to hand off to — if you build it, you own it, and you're on the hook when it breaks.
+
+You'll spend your time:
+
+- Owning the end-to-end pipeline from product events through to the warehouse and BI. We use Snowflake, dbt, Fivetran, and Hex.
+- Shipping new ingestion paths fast — partner integrations, third-party APIs, whatever the business needs next.
+- Building the experimentation data layer that Product and Growth will use to run A/B tests. We have basically nothing here today.
+- Being the on-call person when the Monday morning dashboard is wrong. Yes, even at 7am.
+- Pairing with our PMs and growth folks on the metrics that actually drive the business — you'll be in the room when those decisions get made, not waiting for a ticket.
+- Helping us figure out what the data org looks like at 70 people, then 150. You'll have real influence on hiring, tooling, and how we work.
+
+What we're looking for
+
+- 5+ years of data engineering experience, ideally with significant time at a startup or scale-up
+- Deep dbt and Snowflake experience — we don't have time to teach you the basics
+- Comfortable shipping production code in Python
+- Bias to action. We'd rather you ship a scrappy v1 and iterate than wait six weeks for the perfect design.
+- Strong opinions on data modeling, loosely held
+- You've been the first or second data hire somewhere before and have stories about it
+
+What we don't care about
+
+- Whether you have a CS degree
+- Whether you've worked in our specific industry
+- Big-company titles
+
+If you want process, governance committees, and quarterly planning, this isn't the role. If you want to own things end-to-end and ship every week, let's talk.

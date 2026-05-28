@@ -1,0 +1,42 @@
+Senior Analytics Engineer
+Company: Cloudwave (B2B SaaS, ~600 ppl, Series D)
+Location: Remote (Australia or NZ) — quarterly travel to Sydney HQ
+
+Cloudwave is the operating system for facilities and field-services businesses. We're profitable, growing 60% YoY, and serve 4,000+ customers across ANZ, the US, and EMEA. Our data team sits inside the broader Platform org and partners closely with GTM, Finance, and Product.
+
+The opportunity
+
+We're hiring a Senior Analytics Engineer to join our 8-person data team (3 analytics engineers, 2 data engineers, 2 analysts, 1 manager). You'll be the most senior IC on the analytics engineering side and you'll set the standard for how we build and ship trusted data products to the rest of the business.
+
+Today our stack is:
+
+- Snowflake as the warehouse
+- dbt Cloud for transformation (we have ~700 models and growing)
+- Fivetran and a small set of internal Python ingestion services for sources
+- Looker as the primary BI layer, with a homegrown semantic layer effort underway
+- GitHub + dbt CI for our delivery workflow
+
+What you'll do
+
+- Own the modeling and curation of our core revenue, customer, and product analytics marts — these are the marts the exec team, finance, and the GTM org rely on every day
+- Partner with stakeholders in Finance, Sales Ops, and Customer Success to translate ambiguous business questions into well-modeled, well-documented, well-tested data products
+- Lead our semantic-layer initiative — we want to consolidate metric definitions so "MRR" means the same thing everywhere, and you'll drive that
+- Raise the bar on dbt project hygiene — model conventions, testing standards, documentation, exposures, deprecation processes
+- Mentor the two more junior analytics engineers; review their PRs and pair with them on harder modeling problems
+- Partner with the data engineering team on contracts between raw/staging layers and your downstream marts
+
+What we're looking for
+
+- 5+ years working in analytics engineering, BI engineering, or a closely related discipline; meaningful time in a senior IC role
+- Deep dbt expertise — not just writing models, but thinking about project structure, testing strategy, and how the whole thing scales past a few hundred models
+- Strong SQL and dimensional modeling chops (Kimball-style or equivalent — we don't dogmatic about the school)
+- A track record of building data products that real business stakeholders trust and use, not just dashboards
+- Communication skills that let you explain a tricky modeling tradeoff to a non-technical exec without losing them
+- Experience with a semantic / metrics layer (LookML, Cube, dbt Semantic Layer, MetricFlow) is a strong plus
+- Bonus: SaaS-domain familiarity (ARR/MRR/NRR, sales funnel modeling, product analytics)
+
+How we work
+
+- Async-first, but with deliberate sync time
+- "Strong opinions, weakly held" is a real value here — we'd rather you push back than nod along
+- We invest in tooling. If you think dbt-checkpoint, SQLFluff, Elementary, or similar would help, we'll find the budget.
